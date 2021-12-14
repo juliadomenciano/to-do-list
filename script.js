@@ -1,9 +1,10 @@
-let input = document.getElementById('texto-tarefa')
-let criarTarefa = document.getElementById('criar-tarefa')
-let listaTarefas = document.getElementById('lista-tarefas')
-let apagaTudo = document.getElementById('apaga-tudo')
-let RemoveF = document.getElementById('remover-finalizados')
-let saveList = document.getElementById('salvar-tarefas')
+const input = document.getElementById('texto-tarefa')
+const criarTarefa = document.getElementById('criar-tarefa')
+const listaTarefas = document.getElementById('lista-tarefas')
+const apagaTudo = document.getElementById('apaga-tudo')
+const RemoveF = document.getElementById('remover-finalizados')
+const saveList = document.getElementById('salvar-tarefas')
+const removeSelected = document.getElementById('remover-selecionado')
 
 criarTarefa.addEventListener('click', addTarefa)
 listaTarefas.addEventListener('click', select)
@@ -11,6 +12,7 @@ listaTarefas.addEventListener('dblclick', cross)
 apagaTudo.addEventListener('click', removeList)
 RemoveF.addEventListener('click', removeCrossed)
 saveList.addEventListener('click', save)
+removeSelected.addEventListener('click', removeSelectedItem)
 
 input.addEventListener('keyup', function(event){
     if(event.keyCode === 13){
@@ -77,7 +79,7 @@ function save(){
     
 }
 window.onload = function(){
-    for(let i = 0; i < localStorage.length; i+=2){
+    for(let i = 0; i < localStorage.length; i++){
         let list = JSON.parse(localStorage.getItem('list'))
         for(let i = 0; i < list.length;i++){
             let item = document.createElement('li')
@@ -85,11 +87,14 @@ window.onload = function(){
             let itemClass =  list[i].class
             for(let c = 0; c < itemClass[0].length;c++){
                 let classL = itemClass[c]
-                console.log(classL)
                 item.classList.add(classL)
             }
-/*             console.log(list[i].item) */
             listaTarefas.appendChild(item)
         }
     }
+}
+
+function removeSelectedItem(){
+    let selectedItem = document.querySelector('.selected').remove()
+    
 }
