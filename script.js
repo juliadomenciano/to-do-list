@@ -5,6 +5,8 @@ const apagaTudo = document.getElementById('apaga-tudo')
 const RemoveF = document.getElementById('remover-finalizados')
 const saveList = document.getElementById('salvar-tarefas')
 const removeSelected = document.getElementById('remover-selecionado')
+const moveUp = document.getElementById('mover-cima')
+const moveDown = document.getElementById('mover-baixo')
 
 criarTarefa.addEventListener('click', addTarefa)
 listaTarefas.addEventListener('click', select)
@@ -13,6 +15,8 @@ apagaTudo.addEventListener('click', removeList)
 RemoveF.addEventListener('click', removeCrossed)
 saveList.addEventListener('click', save)
 removeSelected.addEventListener('click', removeSelectedItem)
+moveUp.addEventListener('click', moveSelectedUp)
+moveDown.addEventListener('click', moveSelectedDown)
 
 input.addEventListener('keyup', function(event){
     if(event.keyCode === 13){
@@ -58,7 +62,6 @@ function removeList(){
 
 function removeCrossed(){
     let item = document.querySelectorAll('.completed')
-    console.log(item)
     for(let i of item){
         i.remove('completed')
     }
@@ -97,4 +100,39 @@ window.onload = function(){
 function removeSelectedItem(){
     let selectedItem = document.querySelector('.selected').remove()
     
+}
+
+function moveSelectedUp(){
+    let selected = document.getElementById('lista-tarefas').children
+
+    for(let i = 0; i < selected.length; i++){
+
+        if(selected[i].classList.contains('selected') && i > 0){
+            let move = selected[i]
+            move.parentElement.insertBefore(move, move.previousSibling)
+        }
+    }
+}
+
+
+function moveSelectedDown(){
+    let selected = document.getElementById('lista-tarefas').children
+
+    for(let i = 0; i < selected.length; i++){
+
+        if (selected[i].classList.contains('selected') && i === 0){
+            let sib = selected[i].nextSibling
+            listaTarefas.insertBefore(sib, selected[i])
+            break;
+           
+        }
+
+        else if(selected[i].classList.contains('selected') && i !== 0 && i !== selected.length  - 1){
+            let move = selected[i].nextSibling
+            listaTarefas.insertBefore(move, selected[i])
+            break;
+            
+        }
+        
+    } 
 }
