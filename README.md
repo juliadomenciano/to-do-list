@@ -14,7 +14,7 @@ Project developed during the Trybe development course. Consists of a to do list,
 - Javascript ES6.
 
 
-## Skills developed
+## Skills Developed
 
 - Handling CSS and HTML;
 - DOM manipulation with Javascript;
